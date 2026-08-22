@@ -26,3 +26,7 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Local environment variables
+.env
+.env.*
+!.env.example
