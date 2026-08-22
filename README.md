@@ -346,17 +346,17 @@ test/
 
 ### Project Explorer
 
-_Add screenshot here._
+![alt text](app/assets/images/explorer-page.png)
 
 ### Project Details and Developer Matching
 
-_Add screenshot here._
+![alt text](app/assets/images/details-page.png)
 
 ## Demo
 
 Hosted demo:
 
-_Add deployed application URL here._
+https://devgraph-cr5x.onrender.com/
 
 ## Submission
 
