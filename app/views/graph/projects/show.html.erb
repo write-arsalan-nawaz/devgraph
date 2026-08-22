@@ -1,0 +1,111 @@
+<div class="page">
+  <%= link_to "← All projects", root_path, class: "back-link" %>
+
+  <% if @graph_error %>
+    <div class="alert alert-error">
+      <strong>Graph unavailable</strong>
+      <span><%= @graph_error %></span>
+    </div>
+  <% else %>
+    <header class="project-header">
+      <div>
+        <span class="status status-<%= @project[:status] %>">
+          <%= @project[:status] %>
+        </span>
+
+        <h1><%= @project[:name] %></h1>
+
+        <p>
+          <%= @project[:description] %>
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GRAPH MATCHING</p>
+          <h2>Developer matches</h2>
+        </div>
+      </div>
+
+      <div class="match-list">
+        <% if @matches.empty? %>
+          <div class="empty-state">
+            <h3>No matching developers</h3>
+            <p>No developers currently share skills with this project.</p>
+          </div>
+        <% end %>
+
+        <% @matches.each do |developer| %>
+          <article class="match-card">
+            <div class="match-score">
+              <strong><%= developer[:match_percentage].to_i %>%</strong>
+              <span>match</span>
+            </div>
+
+            <div class="match-main">
+              <h3><%= developer[:name] %></h3>
+
+              <p class="muted">
+                <%= developer[:title] %> · <%= developer[:location] %>
+              </p>
+
+              <div class="skill-list">
+                <% developer[:skills].each do |skill| %>
+                  <span class="skill">
+                    <%= skill[:name] %>
+                    · <%= skill[:level] %>
+                    · <%= skill[:years] %>y
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">REQUIRED SKILLS</p>
+          <h2>What this project needs</h2>
+        </div>
+      </div>
+
+      <div class="skill-list large">
+        <% @project[:skills].each do |skill| %>
+          <span class="skill">
+            <strong><%= skill[:name] %></strong>
+            · <%= skill[:importance] %>
+            · <%= skill[:category] %>
+          </span>
+        <% end %>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GRAPH CONNECTIONS</p>
+          <h2>Developers connected through shared skills</h2>
+        </div>
+      </div>
+
+      <div class="developer-grid">
+        <% @connected_developers.each do |developer| %>
+          <div class="developer-card">
+            <h3><%= developer[:name] %></h3>
+            <p class="muted"><%= developer[:title] %></p>
+
+            <strong>
+              <%= developer[:shared_skills].to_i %>
+              shared skills
+            </strong>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>

@@ -1,0 +1,70 @@
+<div class="page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">DEVGRAPH</p>
+      <h1>Find the right developer for the work.</h1>
+      <p class="hero-copy">
+        Explore projects, skills and developer experience through their
+        relationships in the graph.
+      </p>
+    </div>
+  </header>
+
+  <% if @graph_error %>
+    <div class="alert alert-error">
+      <strong>Graph unavailable</strong>
+      <span><%= @graph_error %></span>
+    </div>
+  <% end %>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">PROJECTS</p>
+        <h2>Explore projects</h2>
+      </div>
+
+      <span class="count">
+        <%= @projects.length %> projects
+      </span>
+    </div>
+
+    <% if @projects.empty? && !@graph_error %>
+      <div class="empty-state">
+        <h3>No projects found</h3>
+        <p>Run <code>bin/rails graph:seed</code> to load the demo graph.</p>
+      </div>
+    <% else %>
+      <div class="project-grid">
+        <% @projects.each do |project| %>
+          <%= link_to graph_project_path(project[:id]), class: "project-card" do %>
+            <div class="card-top">
+              <span class="status status-<%= project[:status] %>">
+                <%= project[:status] %>
+              </span>
+            </div>
+
+            <h3><%= project[:name] %></h3>
+
+            <p>
+              <%= project[:description] %>
+            </p>
+
+            <div class="skill-list">
+              <% project[:skills].compact.each do |skill| %>
+                <span class="skill">
+                  <%= skill[:name] %>
+                </span>
+              <% end %>
+            </div>
+
+            <div class="card-footer">
+              <span>Explore project</span>
+              <span>→</span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</div>
