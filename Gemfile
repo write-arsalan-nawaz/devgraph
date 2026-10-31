@@ -32,7 +32,7 @@ gem "kamal", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
-gem "neo4j-ruby-driver", "~> 6.2"
+gem "neo4j-ruby-driver", "~> 6.3"
 
 gem "dotenv"
 
